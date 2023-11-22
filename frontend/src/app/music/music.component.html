@@ -1,0 +1,40 @@
+<!-- music.component.html -->
+<div class="container mt-4">
+  <h2>Music</h2>
+
+  <!-- Formulario para crear/editar una canción -->
+  <form (ngSubmit)="currentMusic._id ? updateMusic(currentMusic._id, currentMusic.title) : createMusic(currentMusic.title)">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" [(ngModel)]="currentMusic.title" name="title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="file">Upload Music:</label>
+      <input type="file" class="form-control" (change)="uploadMusic($event)" accept=".mp3">
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{currentMusic._id ? 'Update' : 'Add'}}</button>
+  </form>
+
+  <hr>
+
+  <!-- Lista de canciones -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let music of musicList">
+        <td>{{ music.title }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editMusic(music._id)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteMusic(music._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
