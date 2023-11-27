@@ -28,14 +28,28 @@ export class MusicComponent implements OnInit {
     const files = event.target.files;
     if (files.length > 0) {
       const file = files[0];
-      this.formData.append('file', file, file.name);
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      formData.append('title', this.currentMusic.title);
+      this.musicService.uploadMusic(formData)
+        .subscribe(() => {
+          this.getMusic();
+          this.currentMusic = {};
+        });
     }
   }
   uploadImage(event: any): void {
     const files = event.target.files;
     if (files.length > 0) {
       const file = files[0];
-      this.formData.append('file', file, file.name);
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      this.musicService.uploadImage(formData)
+        .subscribe((response) => {
+          console.log('Image uploaded successfully', response);
+        }, (error) => {
+          console.error('Error uploading image', error);
+        });
     }
   }
 

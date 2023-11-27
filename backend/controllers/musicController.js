@@ -29,9 +29,8 @@ exports.getMusicById = (req, res) => {
 // Subir una nueva canción
 exports.uploadMusic = (req, res) => {
   const { title } = req.body;
-  const image = req.file.filename; // Nombre de archivo generado por multer para la imagen
-  const audio = req.file.filename; // Nombre de archivo generado por multer para el audio
-
+  const image = req.file ? req.file.filename : ''; // Error en esta línea
+  const audio = req.file ? req.file.filename : '';
   const newMusic = new Music({
     title: title,
     image: image,

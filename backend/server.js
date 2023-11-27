@@ -1,3 +1,4 @@
+//backend/server.js
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -5,6 +6,8 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 
 const musicController = require('./controllers/musicController');
+
+const itemController = require('./controllers/itemController');
 
 const app = express();
 const port = 3000;
@@ -33,6 +36,12 @@ mongoose.connect('mongodb://0.0.0.0:27017/mydatabase')
   .catch((error) => {
     console.log('Error al conectar a MongoDB:', error);
   });
+// Definir rutas para CRUD de item
+app.get('/api/items', itemController.getItems);
+app.get('/api/items/:id', itemController.getItemById);
+app.post('/api/items', itemController.createItem);
+app.put('/api/items/:id', itemController.updateItem);
+app.delete('/api/items/:id', itemController.deleteItem);
 
 // Definir rutas para CRUD de música
 app.get('/api/music', musicController.getMusic);

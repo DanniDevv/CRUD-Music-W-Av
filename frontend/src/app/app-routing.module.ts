@@ -6,8 +6,8 @@ import { MusicComponent } from './music/music.component';
 const routes: Routes = [
   // puedes descomentarlo si quieres usar esta ruta
   // {path:'items',component:ItemComponent},
-  {path:'',component:ItemComponent},
-  {path:'music',component:MusicComponent}
+  {path:'items',component:ItemComponent},
+  {path:'music',component:MusicComponent},
 ];
 
 @NgModule({
